@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import avatar from './icons/avatar.png'
 
 interface WelcomeBannerProps {
   name: string
@@ -16,7 +17,7 @@ export default function WelcomeBanner({ name }: WelcomeBannerProps) {
 
       <div className="w-28 h-28 rounded-full bg-white/20 flex items-center justify-center">
         <Image
-          src="/placeholder-user.jpg"
+          src={avatar}
           alt="avatar"
           width={90}
           height={90}
