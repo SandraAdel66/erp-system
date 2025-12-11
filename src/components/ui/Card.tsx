@@ -35,14 +35,23 @@ export const CardHeader = ({
   )
 }
 
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  bgColor?: string
+}
+
 export const CardTitle = ({
   className,
   children,
+  bgColor,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) => {
+}: CardTitleProps) => {
   return (
     <h3
-      className={cn('text-lg font-semibold text-gray-900 dark:text-white', className)}
+      className={cn(
+        'text-lg font-semibold text-gray-900 dark:text-white px-3 py-2 rounded-md',
+        className
+      )}
+      style={{ backgroundColor: bgColor }}
       {...props}
     >
       {children}
