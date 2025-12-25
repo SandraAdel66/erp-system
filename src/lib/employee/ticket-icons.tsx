@@ -1,8 +1,5 @@
 import type React from "react"
 
-//////////////////////////
-// Category Icons
-//////////////////////////
 export function getCategoryIcon(category: string) {
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     wifi: WifiIcon,
@@ -63,42 +60,3 @@ function DefaultIcon({ className = "w-6 h-6" }: { className?: string }) {
 }
 
 
-export type StatusLevel = "pending" | "opened" | "postponed" | "ended"
-export type PriorityLevel = "Low" | "Medium" | "High" | "Urgent"
-
-export interface TicketReply {
-  sender: string
-  message: string
-  date: string
-}
-
-export interface TicketStatus {
-  label: StatusLevel
-  color: string 
-  date: string
-}
-
-export interface Ticket {
-  id: string
-  title: string
-  category: string
-  description: string
-  priority: PriorityLevel
-  statusHistory: TicketStatus[]
-  replies: TicketReply[]
-}
-
-
-export const priorityColorMap: Record<PriorityLevel, string> = {
-  Low: "bg-green-100 text-green-800 border-green-200",
-  Medium: "bg-blue-100 text-blue-800 border-blue-200",
-  High: "bg-orange-100 text-orange-800 border-orange-200",
-  Urgent: "bg-red-100 text-red-800 border-red-200",
-}
-
-export const statusColorMap: Record<StatusLevel, string> = {
-  pending: "bg-yellow-500 text-white",
-  opened: "bg-blue-500 text-white",
-  postponed: "bg-orange-500 text-white",
-  ended: "bg-green-500 text-white",
-}

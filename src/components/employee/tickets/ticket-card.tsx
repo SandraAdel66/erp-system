@@ -1,15 +1,9 @@
 import { getCategoryIcon } from "@/lib/employee/ticket-icons"
-import { getPriorityColor } from "@/lib/employee/ticket-utils"
+import { Ticket , getPriorityColor } from "@/lib/employee/ticket-utils"
 import TicketDetailsDialog  from "./ticket-details-dialog"
+
 interface TicketCardProps {
-  ticket: {
-    id: string
-    priority: string
-    category: string
-    title: string
-    description: string
-    sentBy: string
-  }
+  ticket:Ticket
 }
 
 export function TicketCard({ ticket }: TicketCardProps) {
@@ -30,9 +24,9 @@ export function TicketCard({ ticket }: TicketCardProps) {
       </div>
 
       <div className="mb-4">
-        <p className="text-blue-600 text-xs font-medium mb-1">Category</p>
         <h3 className="text-gray-900 font-semibold text-sm mb-2">{ticket.title}</h3>
-        <p className="text-gray-500 text-xs line-clamp-2">{ticket.description}</p>
+        <p className="text-blue-600 text-xs font-medium mb-1">Category</p>
+        <p className="text-gray-500 text-xs line-clamp-2">{ticket.content}</p>
       </div>
 
       <div className="flex items-center justify-between pt-3 border-t border-gray-200">
@@ -40,10 +34,10 @@ export function TicketCard({ ticket }: TicketCardProps) {
           <p className="text-blue-600">ID</p>
           <p className="text-gray-500 font-medium text-xs">{ticket.id}</p>
         </div>
-        <div className="text-right text-xs">
+        {/* <div className="text-right text-xs">
           <p className="text-blue-600">Sent By</p>
           <p className="text-gray-500 font-medium text-xs">{ticket.sentBy}</p>
-        </div>
+        </div> */}
       </div>
 
       <TicketDetailsDialog ticket={ticket}>

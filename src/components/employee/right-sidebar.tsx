@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import avatar from './icons/avatar.png'
 import { Settings } from 'lucide-react'
 
 export default function RightSidebar() {
@@ -26,7 +27,7 @@ export default function RightSidebar() {
         
         <div className="flex items-center gap-3">
           <Image
-            src="/employee-avatar.png" 
+            src={avatar}
             alt="Employee"
             width={48}
             height={48}

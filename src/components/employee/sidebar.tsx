@@ -5,7 +5,7 @@ import { Home, Ticket } from 'lucide-react'
 
 const items = [
   { label: 'Dashboard', href: '/employee/homePage', icon: Home },
-  { label: 'Tickets', href: '/employee/tickets', icon: Ticket },
+  { label: 'Tickets', href: '/employee/tickets/', icon: Ticket },
 ]
 
 export default function Sidebar() {

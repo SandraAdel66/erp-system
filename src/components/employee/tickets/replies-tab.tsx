@@ -2,8 +2,15 @@
 
 import { Ticket } from "@/lib/employee/ticket-utils"
 
+interface Reply {
+  id: string
+  message: string
+  sender: string
+  date: string
+}
+
 interface Props {
-  ticket: Ticket
+  ticket: Ticket & { replies?: Reply[] }
 }
 
 export default function RepliesTab({ ticket }: Props) {
@@ -19,8 +26,8 @@ export default function RepliesTab({ ticket }: Props) {
 
   return (
     <div className="flex flex-col space-y-4 max-h-80 overflow-y-auto">
-      {replies.map((reply, index) => (
-        <div key={index} className="p-2 rounded-md border">
+      {replies.map((reply) => (
+        <div key={reply.id} className="p-2 rounded-md border">
           <p className="font-semibold">{reply.sender}</p>
           <p className="text-sm text-gray-700">{reply.message}</p>
           <p className="text-xs text-gray-400">{reply.date}</p>

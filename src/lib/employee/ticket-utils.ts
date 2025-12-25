@@ -1,7 +1,7 @@
 
 import { getCategoryIcon } from "@/lib/ticket-icons" 
 
-export { getCategoryIcon } // export directly so other files can import
+export { getCategoryIcon } 
 
 export type StatusLevel = "pending" | "opened" | "postponed" | "ended"
 export type PriorityLevel = "Low" | "Medium" | "High" | "Urgent"
@@ -17,15 +17,22 @@ export interface TicketStatus {
   color: string 
   date: string
 }
-
+export interface Category {
+  id: number;
+  name: string;
+}
 export interface Ticket {
-  id: string
-  title: string
-  category: string
-  description: string
-  priority: PriorityLevel
-  statusHistory?: TicketStatus[]
-  replies?: TicketReply[]
+  id: number;
+  ticketNumber: string;
+  title: string;
+  content: string;
+  status: string;
+  priority: string;
+  openAt: string;
+  category: string;
+  employee: string;
+  company?: string;
+  dailyStatus: boolean;
 }
 
 
@@ -44,7 +51,7 @@ export const statusColorMap: Record<StatusLevel, string> = {
 }
 
 
-export function getPriorityColor(priority: string) {
+export function getPriorityColor(priority: string): { bgColor: string; badgeColor: string; badgeBg: string } {
   const colorMap: Record<string, { bgColor: string; badgeColor: string; badgeBg: string }> = {
     High: {
       bgColor: "bg-orange-500",

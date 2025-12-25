@@ -6,7 +6,7 @@ import { useState } from 'react'
 import MainLayout from '@/components/MainLayout'
 import ProfileSidebar from '@/components/Profil/ProfileSidebar'
 import ProfileForm from '@/components/Profil/ProfileForm'
-import DeviceInfo from '@/components/Profil/DeviceInfo'
+
 import TicketsSection from '@/components/Profil/TicketsSection'
 import { ActiveTab, User, Ticket as ProfileTicket, createProfileUser } from '@/types/infoprofile'
 

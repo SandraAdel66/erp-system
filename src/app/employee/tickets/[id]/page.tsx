@@ -1,9 +1,13 @@
 
-import RightSidebar from '@/components/employee/right-sidebar'
+
 import Header  from "@/components/employee/header"
 import { TicketsBanner } from "@/components/employee/tickets/tickets-banner"
 import { TicketFilters } from "@/components/employee/tickets/ticket-filters"
 import { TicketGrid } from "@/components/employee/tickets/ticket-grid"
+
+
+
+
 
 export default function TicketsPage() {
   return (

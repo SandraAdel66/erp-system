@@ -1,10 +1,10 @@
 'use client'
 
-import { Ticket, getCategoryIcon } from "@/lib/employee/ticket-utils"
+import { Ticket } from "@/lib/employee/ticket-utils"
 import { Card, CardHeader, CardContent } from "@/components/ui/Card"
-
+import { getCategoryIcon } from "@/lib/ticket-icons"
 interface Props {
-  ticket: Ticket & { sentBy: string; assignedTo?: string }
+  ticket: Ticket 
 }
 
 // Updated priority colors
@@ -16,7 +16,7 @@ const priorityColors: Record<string, string> = {
 }
 
 export default function TicketDetailsTab({ ticket }: Props) {
-  const Icon = getCategoryIcon(ticket.category)
+  const Icon = getCategoryIcon(ticket.category?.name || "")
   const priorityKey = ticket.priority?.toLowerCase() || "medium"
   const bgColor = priorityColors[priorityKey] || "#8B5CF6"
 
@@ -39,7 +39,7 @@ export default function TicketDetailsTab({ ticket }: Props) {
       <CardContent className="space-y-2 p-4">
         <div>
           <p className="text-gray-500 text-xs font-medium">Category</p>
-          <p className="text-gray-900 text-sm">{ticket.category}</p>
+          <p className="text-gray-900 text-sm">{ticket.category?.name || "Unknown"}</p>
         </div>
 
         <div>
@@ -48,18 +48,8 @@ export default function TicketDetailsTab({ ticket }: Props) {
         </div>
 
         <div>
-          <p className="text-gray-500 text-xs font-medium">Sent By</p>
-          <p className="text-gray-900 text-sm">{ticket.sentBy}</p>
-        </div>
-
-        <div>
-          <p className="text-gray-500 text-xs font-medium">Assigned To</p>
-          <p className="text-gray-900 text-sm">{ticket.assignedTo || "Not Assigned"}</p>
-        </div>
-
-        <div>
           <p className="text-gray-500 text-xs font-medium">Description</p>
-          <p className="text-gray-900 text-sm">{ticket.description}</p>
+          <p className="text-gray-900 text-sm">{ticket.content}</p>
         </div>
       </CardContent>
     </Card>
