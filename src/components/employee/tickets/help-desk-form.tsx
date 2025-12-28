@@ -88,24 +88,6 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
                 </div>
               </div>
 
-              {/* Priority */}
-              <div>
-                <label className="block text-base font-medium text-gray-700 mb-2">Priority</label>
-                <select
-                  name="priority"
-                  value={formData.priority}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  required
-                >
-                  <option value="">Select Priority</option>
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                  <option value="urgent">Urgent</option>
-                </select>
-              </div>
-
               {/* Title */}
               <div>
                 <label className="block text-base font-medium text-gray-700 mb-2">Ticket Title</label>

@@ -26,7 +26,7 @@ export function TicketCard({ ticket }: TicketCardProps) {
       <div className="mb-4">
         <h3 className="text-gray-900 font-semibold text-sm mb-2">{ticket.title}</h3>
         <p className="text-blue-600 text-xs font-medium mb-1">Category</p>
-        <p className="text-gray-500 text-xs line-clamp-2">{ticket.content}</p>
+        <p className="text-gray-500 text-xs line-clamp-2">{ticket.category}</p>
       </div>
 
       <div className="flex items-center justify-between pt-3 border-t border-gray-200">
@@ -34,10 +34,6 @@ export function TicketCard({ ticket }: TicketCardProps) {
           <p className="text-blue-600">ID</p>
           <p className="text-gray-500 font-medium text-xs">{ticket.id}</p>
         </div>
-        {/* <div className="text-right text-xs">
-          <p className="text-blue-600">Sent By</p>
-          <p className="text-gray-500 font-medium text-xs">{ticket.sentBy}</p>
-        </div> */}
       </div>
 
       <TicketDetailsDialog ticket={ticket}>

@@ -16,7 +16,7 @@ const priorityColors: Record<string, string> = {
 }
 
 export default function TicketDetailsTab({ ticket }: Props) {
-  const Icon = getCategoryIcon(ticket.category?.name || "")
+  const Icon = getCategoryIcon(ticket.category?.toLowerCase()|| "")
   const priorityKey = ticket.priority?.toLowerCase() || "medium"
   const bgColor = priorityColors[priorityKey] || "#8B5CF6"
 
@@ -39,7 +39,7 @@ export default function TicketDetailsTab({ ticket }: Props) {
       <CardContent className="space-y-2 p-4">
         <div>
           <p className="text-gray-500 text-xs font-medium">Category</p>
-          <p className="text-gray-900 text-sm">{ticket.category?.name || "Unknown"}</p>
+          <p className="text-gray-900 text-sm">{ticket.category?.toLowerCase() || "Unknown"}</p>
         </div>
 
         <div>
