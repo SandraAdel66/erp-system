@@ -58,7 +58,7 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Ticket Submitted:", formData)
-    // call your addTicket API here
+
   }
 
   return (
