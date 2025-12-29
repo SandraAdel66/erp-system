@@ -28,7 +28,7 @@ export default function QuickActions() {
             <div
               role="button"
               tabIndex={0}
-              className="relative w-60 h-16 bg-white rounded-2xl shadow-md border border-slate-200 cursor-pointer transition hover:shadow-lg overflow-visible"
+              className="relative w-60 h-20 bg-white rounded-2xl shadow-md border border-slate-200 cursor-pointer transition hover:shadow-lg overflow-visible"
             >
               {/* Icon - bottom of image aligns with button bottom */}
               <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-24 h-24 z-10">

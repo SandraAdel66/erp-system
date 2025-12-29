@@ -26,7 +26,7 @@ export default function TicketsTable() {
   }
 
   return (
-    <section className="rounded-2xl">
+    <section className="rounded-2xl p-6">
       <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
 
         {/* HEADER */}

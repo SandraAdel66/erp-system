@@ -2,11 +2,23 @@
 
 import type React from "react"
 import { useState } from "react"
+import { useQuery } from '@tanstack/react-query'
 import { UploadCloud } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { apiFetch } from "@/lib/api"
 
 interface HelpDeskFormProps {
   onBack: () => void
+}
+
+interface Category {
+  id: number
+  name: string
+}
+
+interface TicketType {
+  id: number
+  name: string
 }
 
 export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
@@ -17,6 +29,18 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
     title: "",
     description: "",
     attachment: null as File | null,
+  })
+
+  // Fetch categories
+  const { data: categories = [], isLoading: loadingCategories } = useQuery<Category[]>({
+    queryKey: ['categories'],
+    queryFn: () => apiFetch('/category/index')
+  })
+
+  // Fetch types
+  const { data: types = [], isLoading: loadingTypes } = useQuery<TicketType[]>({
+    queryKey: ['types'],
+    queryFn: () => apiFetch('/type/index')
   })
 
   const handleChange = (
@@ -34,26 +58,22 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Ticket Submitted:", formData)
+    // call your addTicket API here
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center py-6 overflow-y-auto bg-black/30 backdrop-blur-sm px-4">
-      {/* Main container - centered and scrollable */}
       <div className="w-full max-w-md md:w-[500px] my-auto bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden">
-        
-        {/* Fixed header */}
         <div className="bg-purple-400 text-white text-center py-6 rounded-t-3xl">
           <h2 className="text-2xl font-semibold">Create New Ticket</h2>
           <p className="text-sm opacity-90 -mt-1">A New Ticket to the Help Desk</p>
         </div>
 
-        {/* Form with scrollable content */}
         <form onSubmit={handleSubmit} className="flex flex-col h-full">
-          {/* Scrollable content area - fixed height */}
           <div className="max-h-[calc(85vh-200px)] overflow-y-auto p-6">
             <div className="space-y-6">
-              {/* Row 1 */}
               <div className="flex flex-col sm:flex-row gap-6">
+                {/* Type Select */}
                 <div className="flex-1">
                   <label className="block text-base font-medium text-gray-700 mb-2">Type</label>
                   <select
@@ -64,13 +84,17 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
                     required
                   >
                     <option value="">Select Type</option>
-                    <option value="camera">Camera</option>
-                    <option value="monitor">Monitor</option>
-                    <option value="laptop">Laptop</option>
-                    <option value="router">Router</option>
+                    {loadingTypes ? (
+                      <option disabled>Loading types...</option>
+                    ) : (
+                      types.map(t => (
+                        <option key={t.id} value={t.name}>{t.name}</option>
+                      ))
+                    )}
                   </select>
                 </div>
 
+                {/* Category Select */}
                 <div className="flex-1">
                   <label className="block text-base font-medium text-gray-700 mb-2">Category</label>
                   <select
@@ -81,9 +105,13 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
                     required
                   >
                     <option value="">Select Category</option>
-                    <option value="technical">Technical</option>
-                    <option value="billing">Billing</option>
-                    <option value="network">Network</option>
+                    {loadingCategories ? (
+                      <option disabled>Loading categories...</option>
+                    ) : (
+                      categories.map(cat => (
+                        <option key={cat.id} value={cat.name}>{cat.name}</option>
+                      ))
+                    )}
                   </select>
                 </div>
               </div>
@@ -116,12 +144,11 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
                 />
               </div>
 
-              {/* Attachment - Optional */}
+              {/* Attachment */}
               <div>
                 <label className="block text-base font-medium text-gray-700 mb-3">
                   Attachment <span className="text-gray-500 text-sm font-normal">(Optional)</span>
                 </label>
-
                 <label className="flex flex-col items-center justify-center h-36 border-2 border-dashed border-gray-300 rounded-2xl bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
                   <UploadCloud className="w-10 h-10 text-gray-400 mb-2" />
                   <p className="text-gray-600 font-medium">Click to upload or drag & drop</p>
@@ -133,7 +160,6 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
                     accept=".png,.jpg,.jpeg,.gif"
                   />
                 </label>
-
                 {formData.attachment && (
                   <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-xl">
                     <div className="flex items-center justify-between">
@@ -159,7 +185,6 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
             </div>
           </div>
 
-          {/* Fixed buttons at the bottom */}
           <div className="p-6 pt-4 border-t border-gray-100 bg-white">
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
