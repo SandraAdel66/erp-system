@@ -20,7 +20,7 @@ export const addTicketAdmin = async (ticket: Ticket) => {
 
 export const fetchCategories = async (): Promise<Category[]> => {
 
-  const res = await apiFetch(`/category`, {
+  const res = await apiFetch(`/category/index`, {
  
   });
   

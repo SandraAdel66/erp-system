@@ -1,7 +1,6 @@
 "use client"
 
 import { TicketCard } from "./ticket-card"
-
 import { useTickets } from "@/lib/employee/ticketQuiries"
 import { Ticket } from "@/lib/employee/ticket-utils"
 

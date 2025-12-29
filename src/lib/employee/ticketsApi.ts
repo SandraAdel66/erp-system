@@ -30,6 +30,10 @@ export interface FetchTicketsParams {
   orderBy?: string
   orderByDirection?: 'asc' | 'desc'
 }
+export interface Type {
+  id: number
+  name: string
+}
 
 export const fetchTickets = async (
   params: FetchTicketsParams
@@ -74,16 +78,29 @@ export const fetchTicketById = async (
 }
 
 export const fetchCategories = async (): Promise<Category[]> => {
-  const json = await apiFetch(`/category`)
+  const json = await apiFetch('/category/index', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ paginate: false }),
+  })
 
-  if (
-    json &&
-    typeof json === 'object' &&
-    'data' in json &&
-    Array.isArray((json as { data: unknown }).data)
-  ) {
-    return (json as { data: Category[] }).data
+  if (json && typeof json === 'object' && Array.isArray(json.data)) {
+    return json.data as Category[]
   }
 
   throw new Error('Invalid categories response format')
+}
+
+export const fetchTypes = async (): Promise<Type[]> => {
+  const json = await apiFetch('/type/index', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ paginate: false }),
+  })
+
+  if (json && typeof json === 'object' && Array.isArray(json.data)) {
+    return json.data as Type[]
+  }
+
+  throw new Error('Invalid types response format')
 }
