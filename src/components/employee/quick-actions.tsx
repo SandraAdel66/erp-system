@@ -18,7 +18,7 @@ const quickActions: QuickActionItem[] = [
 
 export default function QuickActions() {
   return (
-    <section className="bg-quickActionsBg rounded-2xl p-8 pt-15 shadow-sm border border-slate-200 overflow-visible">
+    <section className="bg-quickActionsBg rounded-2xl p-6 pt-15 shadow-sm border border-slate-200 overflow-visible">
       <h3 className="text-center text-2xl font-semibold mb-20">Quick Actions</h3>
 
       {/* All buttons in a row */}
@@ -43,7 +43,7 @@ export default function QuickActions() {
             </div>
 
             {/* Title below the button */}
-            <span className="mt-3 text-lg font-medium text-blue-500 text-center">
+            <span className="mt-3 text-lg font-bold text-blue-700 text-center">
               {item.title}
             </span>
           </div>

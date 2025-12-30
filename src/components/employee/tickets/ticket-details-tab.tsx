@@ -9,15 +9,15 @@ interface Props {
 
 // Updated priority colors
 const priorityColors: Record<string, string> = {
-  urgent: "#EF4444",   // red
-  high: "#F59E0B",     // yellow/orange
-  medium: "#8B5CF6",   // purple
-  low: "#2563EB"       // blue
+  urgent: "#EF4444",
+  high: "#F59E0B",
+  medium: "#8B5CF6",
+  low: "#2563EB"
 }
 
 export default function TicketDetailsTab({ ticket }: Props) {
-  const Icon = getCategoryIcon(ticket.category?.toLowerCase()|| "")
-  const priorityKey = ticket.priority?.toLowerCase() || "medium"
+  const Icon = getCategoryIcon(ticket.category || "")
+  const priorityKey = ticket.priority || "medium"
   const bgColor = priorityColors[priorityKey] || "#8B5CF6"
 
   return (
@@ -39,7 +39,7 @@ export default function TicketDetailsTab({ ticket }: Props) {
       <CardContent className="space-y-2 p-4">
         <div>
           <p className="text-gray-500 text-xs font-medium">Category</p>
-          <p className="text-gray-900 text-sm">{ticket.category?.toLowerCase() || "Unknown"}</p>
+          <p className="text-gray-900 text-sm">{ticket.category || "Unknown"}</p>
         </div>
 
         <div>

@@ -6,7 +6,7 @@ import RightSidebar from "@/components/employee/right-sidebar"
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="w-full h-screen bg-slate-50 flex overflow-hidden">
-      
+
       <div className="w-64 border-r border-slate-200 bg-white">
         <Sidebar />
       </div>

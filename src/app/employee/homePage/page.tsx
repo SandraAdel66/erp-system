@@ -13,7 +13,7 @@ export default function HomePage() {
 
   <main className="flex-1  p-6 space-y-8">
     <Header />
-    <WelcomeBanner name="Sandra" />
+    <WelcomeBanner name="Employee" />
     <QuickActions />
     <TicketStatsCards />
     <TicketsTable />

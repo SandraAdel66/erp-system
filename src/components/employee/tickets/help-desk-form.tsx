@@ -6,6 +6,7 @@ import { UploadCloud } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useQuery } from '@tanstack/react-query'
 import { fetchCategories, fetchTypes } from '@/lib/employee/ticketsApi'
+import { createTicketByEmployee } from '@/lib/employee/ticketsApi'
 
 interface HelpDeskFormProps {
   onBack: () => void
@@ -46,10 +47,25 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
     setFormData(prev => ({ ...prev, attachment: file }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Ticket Submitted:', formData)
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+
+  try {
+    await createTicketByEmployee({
+      title: formData.title,
+      content: formData.description,
+      category_id: Number(formData.category),
+      device_id: Number(formData.type),
+    })
+
+    onBack()
+  } catch (error) {
+    console.error(error)
   }
+}
+
+
+
 
 
 
@@ -140,6 +156,7 @@ export function HelpDeskForm({ onBack }: HelpDeskFormProps) {
             <label className="flex flex-col items-center justify-center h-36 border-2 border-dashed rounded-2xl cursor-pointer">
               <UploadCloud className="w-10 h-10 mb-2 text-gray-400" />
               <p>Click to upload</p>
+              <p className="text-xs text-gray-500 mt-1">PNG, JPG, GIF up to 10MB</p>
               <input type="file" hidden onChange={handleFileUpload} />
             </label>
 

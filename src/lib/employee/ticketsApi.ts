@@ -1,6 +1,5 @@
 import { apiFetch } from '@/lib/api'
-import { Ticket, Category } from '@/lib/employee/ticket-utils'
-
+import { Ticket } from '@/lib/employee/ticket-utils'
 
 export interface PaginationLink {
   url: string | null
@@ -21,7 +20,6 @@ export interface ApiListResponse<T, M = PaginationMeta> {
   meta?: M
 }
 
-
 export interface FetchTicketsParams {
   filters?: Record<string, unknown>
   page?: number
@@ -30,7 +28,13 @@ export interface FetchTicketsParams {
   orderBy?: string
   orderByDirection?: 'asc' | 'desc'
 }
+
 export interface Type {
+  id: number
+  name: string
+}
+
+export interface Category {
   id: number
   name: string
 }
@@ -95,12 +99,44 @@ export const fetchTypes = async (): Promise<Type[]> => {
   const json = await apiFetch('/type/index', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ paginate: false }),
+    body: JSON.stringify({
+      filters: {
+        "type": 'device',
+      },
+    }),
   })
 
-  if (json && typeof json === 'object' && Array.isArray(json.data)) {
-    return json.data as Type[]
+  if (
+    json &&
+    typeof json === 'object' &&
+    'data' in json &&
+    Array.isArray((json as { data: unknown }).data)
+  ) {
+    return (json as { data: Type[] }).data
   }
 
   throw new Error('Invalid types response format')
+}
+
+export interface CreateTicketPayload {
+  title: string
+  content: string
+  category_id: number
+  device_id: number
+}
+
+export const createTicketByEmployee = async (
+  payload: CreateTicketPayload
+): Promise<Ticket> => {
+  const json = await apiFetch('/ticket/create-by-employee', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+
+  if (json && typeof json === 'object' && 'data' in json) {
+    return (json as { data: Ticket }).data
+  }
+
+  throw new Error('Failed to create ticket')
 }
